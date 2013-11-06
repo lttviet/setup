@@ -10,6 +10,8 @@ sudo add-apt-repository ppa:apt-fast/stable
 sudo apt-get update
 sudo apt-get install -y apt-fast
 
+sudo apt-get install git tmux
+
 # git pull and install dotfiles
 cd $HOME
 if [ -d ./dotfiles/ ]; then
