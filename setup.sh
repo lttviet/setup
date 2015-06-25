@@ -8,10 +8,10 @@ alias update="sudo apt-fast update"
 alias upgrade="sudo apt-fast upgrade"
 
 # Remove unnecessary softwares
-purge friends* empathy
+purge friends* empathy totem
 purge unity-scope-musicstores unity-scope-openclipart unity-scope-yelp
 purge unity-scope-colourlovers
-purge evolution-data-server
+purge evolution-data-server rhythmbox*
 
 # Install Heroku toolbelt
 # https://toolbelt.heroku.com/debian
@@ -26,7 +26,7 @@ sudo add-apt-repository -y ppa:saiarcot895/myppa
 sudo add-apt-repository -y ppa:linrunner/tlp
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
-sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
 sudo apt-get update
 
@@ -34,18 +34,25 @@ sudo apt-get install -y apt-fast
 
 sudo apt-fast upgrade -y
 
-instal ubuntu-restricted-extras openjdk-8-jdk
-instal clang yasm devscripts build-essential
-instal python-dev python-pip
-instal htop iotop
-instal synaptic xclip
-instal redshift-gtk
-instal zram-config tlp
-instal nautilus-dropbox
-instal sublime-text-installer
-instal neovim git iojs
-instal simplescreenrecorder
-#instal texlive texlive-xetex
+instal -y ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts
+instal -y htop iotop mpv python-pip synaptic xclip build-essential python-dev
+instal -y redshift-gtk zram-config tlp nautilus-dropbox sublime-text-installer
+instal -y neovim iojs simplescreenrecorder python3-dev python3-pip curl
+instal -y rbenv
+#instal -y texlive texlive-xetex
+
+# neovim plugins
+sudo pip install neovim
+#sudo pip3 install neovim
+
+# patched fonts for vim-airline
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+mkdir -p .fonts
+mv PowerlineSymbols.otf ~/.fonts/
+fc-cache -vf ~/.fonts/
+mkdir -p .congig/fontconfig/conf.d
+mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 sudo tlp start
 
@@ -66,7 +73,9 @@ fi
 git clone https://github.com/lttviet/dotfiles.git
 ln -sb dotfiles/.nvimrc .
 ln -sb dotfiles/.bashrc .
-ln -sb dotfiles/.redshift.conf .config
+ln -sb dotfiles/redshift.conf .config
+ln -sb dotfiles/.gitconfig .
+ln -sb dotfiles/.gitignore_global .
 
 source .bashrc
 
