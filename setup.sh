@@ -52,9 +52,6 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 
 sudo tlp start
 
-# fix dropbox
-echo fs.inotify.max_user_watches=100000 | sudo tee -a /etc/sysctl.conf; sudo sysctl -p
-
 # git pull and install dotfiles
 cd $HOME
 if [ -d ~/dotfiles/ ]; then
