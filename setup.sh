@@ -27,6 +27,9 @@ sudo add-apt-repository -y ppa:neovim-ppa/unstable
 curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
 echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
 
+# fix inotify
+echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+
 update
 
 instal ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts apt-transport-https ca-certificates
@@ -65,6 +68,7 @@ ln -sb ~/dotfiles/.bashrc .
 ln -sb ~/dotfiles/redshift.conf .config
 ln -sb ~/dotfiles/.gitconfig .
 ln -sb ~/dotfiles/.gitignore_global .
+ln -sb ~/dotfiles/.livestreamerrc .
 
 # syncthing systemd
 mkdir -p ~/.config/systemd/user
