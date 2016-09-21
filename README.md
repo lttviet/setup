@@ -1,4 +1,4 @@
 setup
 =====
 
-setup file for Ubuntu desktop 15.04
+setup file for Ubuntu desktop 16.10

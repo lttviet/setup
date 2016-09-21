@@ -8,10 +8,8 @@ alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
 
 # Remove unnecessary softwares
-purge friends* empathy totem
-purge unity-scope-musicstores unity-scope-openclipart unity-scope-yelp
-purge unity-scope-colourlovers
-purge evolution-data-server rhythmbox*
+purge totem unity-scope-openclipart unity-scope-yelp unity-scope-colourlovers
+purge evolution-data-server rhythmbox* unity-scope-zotero
 
 # Install Heroku toolbelt
 # https://toolbelt.heroku.com/debian
@@ -20,14 +18,11 @@ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 # Add PPA repos
 sudo add-apt-repository -y ppa:linrunner/tlp
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo add-apt-repository -y ppa:maarten-baert/simplescreenrecorder
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 
 # Add Syncthing
 curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
 echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
-
-# fix inotify
 echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
 
 update
@@ -35,25 +30,27 @@ update
 instal ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts apt-transport-https ca-certificates
 instal htop iotop iftop nethogs mpv python-pip synaptic xclip build-essential python-dev
 instal redshift-gtk zram-config tlp sublime-text-installer virtualenvwrapper
-instal neovim simplescreenrecorder python3-dev python3-pip curl neovim docker-engine
-instal rbenv cmake ruby-dev libtool-bin autoconf libzmq3 libzmq3-dev syncthing
+instal neovim python3-dev python3-pip curl neovim docker.io docker-compose
+instal rbenv cmake ruby-dev libtool-bin autoconf libzmq3-dev syncthing keepassx
 
 # patched fonts for vim-airline
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mkdir -p .fonts
+mkdir -p ~/.fonts
 mv PowerlineSymbols.otf ~/.fonts/
 fc-cache -vf ~/.fonts/
-mkdir -p .congig/fontconfig/conf.d
+mkdir -p ~/.config/fontconfig/conf.d
 mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 # vim-plug
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo tlp start
+# neovim python plugins
+pip install --upgrade neovim
+pip3 install --upgrade neovim
 
-# git pull and install dotfiles
+# symlinks dotfiles
 cd $HOME
 if [ -d ~/dotfiles/ ]; then
     mv ~/dotfiles ~/dotfiles.old
@@ -68,7 +65,6 @@ ln -sb ~/dotfiles/.bashrc .
 ln -sb ~/dotfiles/redshift.conf .config
 ln -sb ~/dotfiles/.gitconfig .
 ln -sb ~/dotfiles/.gitignore_global .
-ln -sb ~/dotfiles/.livestreamerrc .
 
 # syncthing systemd
 mkdir -p ~/.config/systemd/user
@@ -77,5 +73,7 @@ systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 systemctl --user enable syncthing-inotify.service
 systemctl --user start syncthing-inotify.service
+
+sudo tlp start
 
 source .bashrc
