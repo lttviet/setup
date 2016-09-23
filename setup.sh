@@ -32,6 +32,7 @@ instal htop iotop iftop nethogs mpv python-pip synaptic xclip build-essential py
 instal redshift-gtk zram-config tlp sublime-text-installer virtualenvwrapper
 instal neovim python3-dev python3-pip curl neovim docker.io docker-compose
 instal rbenv cmake ruby-dev libtool-bin autoconf libzmq3-dev syncthing keepassx
+install libssl-dev libreadline-dev zlib1g-dev
 
 # patched fonts for vim-airline
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
@@ -73,6 +74,9 @@ systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 systemctl --user enable syncthing-inotify.service
 systemctl --user start syncthing-inotify.service
+
+# rbenv install plugins
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 sudo tlp start
 
