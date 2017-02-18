@@ -66,6 +66,7 @@ ln -sb ~/dotfiles/.bashrc .
 ln -sb ~/dotfiles/redshift.conf .config
 ln -sb ~/dotfiles/.gitconfig .
 ln -sb ~/dotfiles/.gitignore_global .
+ln -sb ~/dotfiles/.tmux.conf .
 
 # syncthing systemd
 mkdir -p ~/.config/systemd/user
