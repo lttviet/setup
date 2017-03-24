@@ -25,8 +25,8 @@ update
 instal ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts git
 instal neovim nethogs mpv python-pip synaptic xclip build-essential
 instal redshift-gtk sublime-text-installer htop iotop
-instal python3-dev python3-pip neovim
-instal cmake ruby-dev libtool-bin autoconf libzmq3-dev syncthing
+instal python3-dev python3-pip neovim syncthing syncthing-inotify
+instal cmake ruby-dev libtool-bin autoconf libzmq3-dev
 instal libssl-dev libreadline-dev zlib1g-dev
 
 sudo snap install keepassxc
