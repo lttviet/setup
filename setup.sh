@@ -8,28 +8,21 @@ alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
 
 # Remove unnecessary softwares
-purge totem unity-scope-openclipart unity-scope-yelp unity-scope-colourlovers
-purge rhythmbox* unity-scope-zotero unity-scope-tomboy unity-scope-gdrive
-purge thunderbird
+purge totem rhythmbox* thunderbird
 
 # Add PPA repos
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-
-# Add Syncthing
-curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
-echo "deb http://apt.syncthing.net/ syncthing release" | sudo tee /etc/apt/sources.list.d/syncthing.list
-echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
 
 update
 
 instal ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts git
 instal neovim nethogs mpv python-pip synaptic xclip build-essential
-instal redshift-gtk sublime-text-installer htop iotop
-instal python3-dev python3-pip neovim syncthing syncthing-inotify
-instal cmake ruby-dev libtool-bin autoconf libzmq3-dev
-instal libssl-dev libreadline-dev zlib1g-dev
+instal redshift-gtk sublime-text-installer htop iotop linux-image-extra-virtual
+instal python3-dev python3-pip neovim cmake ruby-dev libtool-bin autoconf
+instal libssl-dev libreadline-dev zlib1g-dev tmux libzmq3-dev
 
-sudo snap install keepassxc
+# texlive
+#instal texlive-fonts-extra texlive-xetex
 
 # patched fonts for vim-airline
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
@@ -62,26 +55,24 @@ ln -sb ~/dotfiles/.gitignore_global .
 ln -sb ~/dotfiles/.tmux.conf .
 
 # systemd
-mkdir -p ~/.config/systemd/user
-cp ~/dotfiles/syncthing* ~/.config/systemd/user/
-systemctl --user enable syncthing.service
-systemctl --user start syncthing.service
-systemctl --user enable syncthing-inotify.service
-systemctl --user start syncthing-inotify.service
-
-sudo sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
-cp ~/dotfiles/rclone-mount.service ~/.config/systemd/user/
-systemctl --user enable rclone-mount.service
-systemctl --user start rclone-mount.service
+#mkdir -p ~/.config/systemd/user
+#sudo sed -i 's/#user_allow_other/user_allow_other/' /etc/fuse.conf
+#cp ~/dotfiles/rclone-mount.service ~/.config/systemd/user/
+#systemctl --user enable rclone-mount.service
+#systemctl --user start rclone-mount.service
 
 # rbenv install plugins
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 cd ~/.rbenv && src/configure && make -C src
 
-#pyenv
+# pyenv
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
+# grub
 sudo sed -i 's/quiet splash//' /etc/default/grub
 sudo sed -i 's/#GRUB_TERMINAL/GRUB_TERMINAL/' /etc/default/grub
 sudo update-grub
+
+# docker
+sudo usermod -aG docker $(whoami)
