@@ -12,6 +12,7 @@ purge totem rhythmbox* thunderbird
 
 # Add PPA repos
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+sudo add-apt-repository ppa:phoerious/keepassxc
 
 update
 
@@ -19,7 +20,7 @@ instal ubuntu-restricted-extras openjdk-8-jdk clang yasm devscripts git
 instal neovim nethogs mpv python-pip synaptic xclip build-essential
 instal redshift-gtk sublime-text-installer htop iotop linux-image-extra-virtual
 instal python3-dev python3-pip neovim cmake ruby-dev libtool-bin autoconf
-instal libssl-dev libreadline-dev zlib1g-dev tmux libzmq3-dev
+instal libssl-dev libreadline-dev zlib1g-dev tmux libzmq3-dev keepassxc
 
 # texlive
 #instal texlive-fonts-extra texlive-xetex
