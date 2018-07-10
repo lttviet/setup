@@ -7,12 +7,15 @@ alias instal="sudo apt install -y"
 alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
 
-# Remove unnecessary softwares
-purge totem rhythmbox* thunderbird
+instal apt-transport-https
 
-# Add PPA repos
-sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
-sudo add-apt-repository ppa:phoerious/keepassxc
+# select best repo
+#https://askubuntu.com/questions/39922/how-do-you-select-the-fastest-mirror-from-the-command-line
+#curl -s http://mirrors.ubuntu.com/mirrors.txt | xargs -n1 -I {} sh -c 'echo `curl -r 0-102400 -s -w %{speed_download} -o /dev/null {}/ls-lR.gz` {}' |sort -g -r |head -1| awk '{ print $2  }'
+
+# sublime text 3 repo
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
 update
 
@@ -33,10 +36,6 @@ mv PowerlineSymbols.otf ~/.fonts/
 fc-cache -vf ~/.fonts/
 mkdir -p ~/.config/fontconfig/conf.d
 mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-
-# vim-plug
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # symlinks dotfiles
 cd $HOME
@@ -76,4 +75,4 @@ sudo sed -i 's/#GRUB_TERMINAL/GRUB_TERMINAL/' /etc/default/grub
 sudo update-grub
 
 # docker
-sudo usermod -aG docker $(whoami)
+#sudo usermod -aG docker $(whoami)
