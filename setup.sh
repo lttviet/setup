@@ -24,6 +24,7 @@ instal neovim nethogs mpv python-pip synaptic xclip build-essential
 instal redshift-gtk sublime-text-installer htop iotop linux-image-extra-virtual
 instal python3-dev python3-pip neovim cmake ruby-dev libtool-bin autoconf
 instal libssl-dev libreadline-dev zlib1g-dev tmux libzmq3-dev keepassxc
+instal libbz2-dev libsqlite3-dev
 
 # texlive
 #instal texlive-fonts-extra texlive-xetex
